@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day1</title>
+  <script src="./index.js"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="keys">
+    <div class="key" press-key="81">
+      <span>Q</span>
+    </div>
+    <div class="key" press-key="87">
+      <span>W</span>
+    </div>
+    <div class="key" press-key="69">
+      <span>E</span>
+    </div>
+    <div class="key" press-key="82">
+      <span>R</span>
+    </div>
+    <div class="key" press-key="84">
+      <span>T</span>
+    </div>
+    <div class="key" press-key="89">
+      <span>Y</span>
+    </div>
+    <div class="key" press-key="85">
+      <span>U</span>
+    </div>
+    <div class="key" press-key="73">
+      <span>I</span>
+    </div>
+    <div class="key" press-key="79">
+      <span>O</span>
+    </div>
+    <div class="key" press-key="80">
+      <span>P</span>
+    </div>
+  </div>
+  
+
+  <div></div>
+  <div></div>
+
+  <audio keys="81" src="./sounds/boom.wav"></audio>
+  <audio keys="87" src="./sounds/clap.wav"></audio>
+  <audio keys="69" src="./sounds/hihat.wav"></audio>
+  <audio keys="82" src="./sounds/kick.wav"></audio>
+  <audio keys="84" src="./sounds/openhat.wav"></audio>
+  <audio keys="89" src="./sounds/ride.wav"></audio>
+  <audio keys="85" src="./sounds/snare.wav"></audio>
+  <audio keys="73" src="./sounds/tink.wav"></audio>
+  <audio keys="79" src="./sounds/tom.wav"></audio>
+  <audio keys="80" src="./sounds/boom.wav"></audio>
+
+
+  <script>
+    
+    palyPressEvent=(e)=>{
+      // console.log(e.keyCode);
+      const audio = document.querySelector(`audio[keys='${e.keyCode}']`);
+      // const test = document.querySelector('div[press-key="81"]')
+      // console.log(audio);
+      // document.querySelector
+      // Returns the first Element within the document that matches the specified selector, 
+      // or group of selectors, or null if no matches are found.
+      // Returns null if no matches are found; otherwise, it returns the first matching element.
+      const key = document.querySelector(`div[press-key='${e.keyCode}']`);
+      console.log(key);
+
+      if (!audio) return; // 沒有audio 停止function runiing
+
+      audio.currentTime = 0;
+      //The HTMLMediaElement.currentTime property gives the current playback time in seconds. 
+      //Setting this value seeks the media to the new time.
+      audio.play();
+      // The HTMLMediaElement.play() method attempts to begin playback of the media and returns a Promise 
+      // which is fulfilled when the playback has been successfully started,
+      // and which is rejected if playback fails to begin for any reason 
+      // (such as permission issues or other problems).
+      key.classList.add('playing');
+      // elementClasses is a DOMTokenList representing the class attribute of elementNodeReference. 
+      // If the class attribute was not set or is empty elementClasses.length returns 0. 
+      // element.classList itself is read-only, 
+      // although you can modify it using the add() and remove() methods.
+    }
+
+
+    removeTransition=(e)=>{
+      if(e.propertyName !== 'transform') return;
+      // The propertyName property returns the name of the CSS property associated with the transition, 
+      // when a transitionevent occurs.
+      console.log(e);
+      e.target.classList.remove('playing');
+      //e.target:The target event property returns the element that triggered the event
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    window.addEventListener('keydown',palyPressEvent);
+  </script>
+
+</body>
+</html>

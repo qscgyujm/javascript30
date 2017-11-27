@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day3</title>
+</head>
+<body>
+  <h2><span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ff0000">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+    :root {
+      --base: #ff0000;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+    /* 
+      The :root CSS pseudo-class matches the root element of a tree representing the document. 
+      In HTML, :root represents the <html> element and is identical to the selector html, 
+      except that its specificity is higher.
+    */
+
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
+    /*  */
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width:100px;
+    }
+  </style>
+
+  <script>
+    const inputs = document.querySelectorAll('.controls input');
+    
+    function handleUpdate(){
+      // console.log('this', this);
+      // console.log(this.value);
+      // console.log(this.dataset);
+
+      const suffix = this.dataset.sizing || '';
+      console.log(suffix)
+      document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix);
+      // document.getElementsByName('img').style.setProperty(`--${this.name}`, this.value);
+      // The HTMLElement.dataset property allows access, both in reading and writing mode, 
+      // to all the custom data attributes (data-*) set on the element, 
+      // either in HTML or in the DOM.  It is a map of DOMString, 
+      // one entry for each custom data attribute.
+    }
+
+
+    inputs.forEach(input => {
+      input.addEventListener('change', handleUpdate);
+    });
+    inputs.forEach(input =>{
+      input.addEventListener('mousemove', handleUpdate);
+    });
+
+  </script>
+</body>
+</html>

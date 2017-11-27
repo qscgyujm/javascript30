@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day2</title>
+</head>
+<body>
+  
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour"></div>
+      <div class="hand minute"></div>
+      <div class="hand second"></div>
+    </div>
+
+  </div>
+  <script>
+    const second = document.querySelector('.second');
+    const minute = document.querySelector('.minute');
+    const hour = document.querySelector('.hour');
+
+
+    setDate=()=>{
+      const now = new Date();
+
+      const seconds = now.getSeconds();
+      const secondDegress = ((seconds/ 60) * 360) +90 ;
+      const minutes = now.getMinutes();
+      const minuteDegress = ((minutes/ 60) * 360) +90 ;
+      const hours = now.getHours();
+      const hourDegress = ((hours/ 60) * 360) +90 ;
+
+      console.log( hours, minutes, seconds);
+
+      second.style.transform=`rotate(${secondDegress}deg )`;
+      minute.style.transform=`rotate(${minuteDegress}deg )`;
+      hour.style.transform=`rotate(${hourDegress}deg )`;
+    }
+
+    setInterval(setDate, 1000);
+    // The setInterval() method calls a function or 
+    // evaluates an expression at specified intervals (in milliseconds).
+    // The setInterval() method will continue calling 
+    // the function until clearInterval() is called, or the window is closed.
+  </script>
+  <style>
+    html {
+      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background-size:cover;
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border:20px solid white;
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);
+      /* 
+        translate 移動位置
+      */
+    }
+    .hand {
+      width:50%;
+      height:6px;
+      background:black;
+      position: absolute;
+      top:50%;
+
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      /*  
+        The perspective-origin CSS property determines the position at which the viewer is looking. 
+        It is used as the vanishing point by the perspective property.
+        default 50 %
+
+        The transform CSS property lets you modify the coordinate space of the CSS visual formatting model. 
+        Using it, elements can be translated, rotated, scaled, and skewed.
+      */
+    }
+    .hour{
+      height: 10px;
+    }
+    .minute{
+      height: 5px;;
+    }
+    .second{
+      height: 3px;
+    }
+  </style>
+</body>
+</html>
