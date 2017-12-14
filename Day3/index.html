@@ -34,7 +34,6 @@
       except that its specificity is higher.
     */
 
-
     img {
       padding: var(--spacing);
       background: var(--base);
@@ -73,7 +72,7 @@
 
       const suffix = this.dataset.sizing || '';
       console.log(suffix)
-      document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix);
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
       // document.getElementsByName('img').style.setProperty(`--${this.name}`, this.value);
       // The HTMLElement.dataset property allows access, both in reading and writing mode, 
       // to all the custom data attributes (data-*) set on the element, 

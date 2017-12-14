@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day8</title>
+</head>
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw')
+    const ctx = canvas.getContext('2d')
+    // 一開始canvas為空白，程式碼腳本需要先存取渲染環境，在上面繪圖，然後才會顯現影像。
+    // <canvas> 素有一個方法(method)叫getContext()，透過此方法可以取得渲染環境及其繪圖函數(function)；
+    // getContext()輸入參數只有渲染環境類型一項，像本教學所討論的2D繪圖，就是輸入”2d”。
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    // intViewportHeight(width) is the height(width) of the browser window's viewport
+    ctx.strokeStyle="#ff0000"
+    // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
+    ctx.lineJoin = "round"
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin
+    ctx.lineCap = 'round'
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap
+    ctx.lineWidth = 100
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth
+    ctx.globalCompositeOperation='screen'
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+
+    // flag
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hue = 0;
+    let sizeFlag = true;
+
+    function draw(e) {
+      if(!isDrawing) return //當isDrawing不是true的時候，停止執行fn
+       console.log(e)
+
+      ctx.strokeStyle=`hsl(${hue}, 100%, 50%)`
+      // https://www.w3schools.com/colors/colors_hsl.asp
+      ctx.beginPath()
+      // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath
+      // 起始點
+      ctx.moveTo(lastX, lastY)
+      // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
+      // 目標點
+      ctx.lineTo(e.offsetX, e.offsetY)
+      // The CanvasRenderingContext2D.lineTo() method of the Canvas 2D API connects the last point in the sub-path to the x, y coordinates with a straight line (but does not actually draw it).
+      ctx.stroke()
+      // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke
+      
+      [lastX, lastY] = [e.offsetX, e.offsetY]
+
+      hue++
+      if (hue>=360) {
+        hue = 0
+      }
+
+      // console.log(ctx.lineWidth<=0)
+      if (ctx.lineWidth >=100 || ctx.lineWidth <=1) {
+        // When setting, zero, negative, Infinity and NaN values are ignored; 
+        // otherwise the current value is set to the new value.
+        // 不能設置 >1 
+        sizeFlag = !sizeFlag
+      }
+      if (sizeFlag) {
+        ctx.lineWidth++
+      }else{
+        ctx.lineWidth--
+      }
+    }
+    // 透過flag 控制游標狀態
+    canvas.addEventListener('mousedown', e => {
+      isDrawing = true;  //不打分號 下一行無法執行
+      [lastX, lastY] = [e.offsetX, e.offsetY]
+      // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
+
+    })
+    canvas.addEventListener('mousemove', draw)
+    canvas.addEventListener('mouseup', () => isDrawing = false)
+    canvas.addEventListener('mouseup', () => isDrawing = false)
+    // 
+  </script>
+  <style>
+    html, body {
+      margin:0;
+    }
+  </style>
+</body>
+</html>

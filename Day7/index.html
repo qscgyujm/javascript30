@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const people = [
+      { name: 'Wes', year: 1988 },
+      { name: 'Kait', year: 1986 },
+      { name: 'Irv', year: 1970 },
+      { name: 'Lux', year: 2015 }
+    ];
+
+    const comments = [
+      { text: 'Love this!', id: 523423 },
+      { text: 'Super good', id: 823423 },
+      { text: 'You are the best', id: 2039842 },
+      { text: 'Ramen is my fav food ever', id: 123523 },
+      { text: 'Nice Nice Nice!', id: 542328 }
+    ];
+
+    // Q1, Some and Every Checks
+    // Array.prototype.some() // is at least one person 19 or older?
+    // The some() method tests whether at least one element in the array passes the test implemented by the provided function.
+
+    const now = new Date();
+    // const currentYear = (new Date()).getFullYear();
+    const somePractice = people.some(people => now.getFullYear()- people.year > 19)
+    console.log(somePractice)
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+
+    // Q2, Array.prototype.every() // is everyone 19 or older?
+
+    const everyPractice = people.every(people => now.getFullYear()- people.year > 19)
+    console.log(everyPractice)
+    // The every() method tests whether all elements in the array pass the test implemented by the provided function.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+
+    // Array.prototype.find()
+    // Find is like filter, but instead returns just the one you are looking for
+    // find the comment with the ID of 823423
+    // The find() method returns the value of the first element in the array that satisfies the provided testing function. 
+    const findPractice = comments.find(comment => comment.id == 823423)
+    console.log(findPractice)
+
+    // Array.prototype.findIndex()
+    // Find the comment with this ID
+    // delete the comment with the ID of 823423
+    const findIndexPractice = comments.findIndex(comment => comment.id == 123523)
+    console.log(findIndexPractice)
+
+    // 延伸上一題
+    // Array.prototype.splice()
+    // The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
+    // splice 對原變數產生變動
+    comments.splice(findIndexPractice, 1);
+    console.log(comments);
+
+    // 產生新變數
+    const newComments = [
+      ...comments.splice(0, findIndexPractice),
+      ...comments.splice(findIndexPractice+1)
+    ]
+    console.log(newComments)
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+
+  </script>
+</body>
+</html>

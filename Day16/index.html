@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day16</title>
+</head>
+<body>
+  
+  <div class="hero">
+    <h1 contenteditable>🔥Day16 Traing😱</h1>
+  </div>
+  
+  <script>
+    const heroDiv = document.querySelector('.hero')
+    const text = heroDiv.querySelector('h1')
+    const percent = 100
+
+    function setShadow(e) {
+    //   const Width = heroDiv.offsetWidth
+    //   const Heigth = heroDiv.offsetHeigth
+      const { offsetWidth: Width , offsetHeight: Heigth} = heroDiv
+      let { offsetX: x, offsetY: y } = e
+      // console.log(Width, Heigth, x , y);
+      // console.log(this, e.target);
+
+      if (this != e.target) {
+        x = x + e.target.offsetLeft
+        y = y +  e.target.offsetTop
+      }
+      console.log(x, y);
+
+      xWalk = (x / Width * percent) - (percent / 2)
+      yWalk = (y / Heigth * percent) - (percent / 2)
+      console.log(xWalk, yWalk);
+
+      text.style.textShadow = `
+        ${xWalk * 1}px ${yWalk * 1}px 0 rgba(255, 0 , 0 , 0.7),
+        ${xWalk * -1}px ${yWalk * 1}px 0 rgba(0, 255 , 0 , 0.7),
+        ${xWalk * 1}px ${yWalk * -1}px 0 rgba(0, 0 , 255 , 0.7),
+        ${xWalk * -1}px ${yWalk * -1}px 0 rgba(255, 255 , 0 , 0.7)
+      `
+    }
+
+    heroDiv.addEventListener('mousemove', setShadow)
+  </script>
+  <style>
+  html {
+    color:black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+</body>
+</html>

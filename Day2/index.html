@@ -21,22 +21,25 @@
     const minute = document.querySelector('.minute');
     const hour = document.querySelector('.hour');
 
+    const now = new Date();
+    let seconds = now.getSeconds()*6+90;
+    let minutes = now.getMinutes()*6+90;
+    let hours = now.getHours()*30+90;
+
+    second.style.transform=`rotate(${ seconds }deg ) scaleX(1)`;
+    minute.style.transform=`rotate(${ minutes }deg ) scaleX(.8)`;
+    hour.style.transform=`rotate(${ hours }deg) scaleX(.6)`;
 
     setDate=()=>{
-      const now = new Date();
+      seconds += 360/60;
+      minutes += 360/3600;
+      hours += 360/86400;
 
-      const seconds = now.getSeconds();
-      const secondDegress = ((seconds/ 60) * 360) +90 ;
-      const minutes = now.getMinutes();
-      const minuteDegress = ((minutes/ 60) * 360) +90 ;
-      const hours = now.getHours();
-      const hourDegress = ((hours/ 60) * 360) +90 ;
+      console.log((new Date()).getHours(), (new Date()).getMinutes(), (new Date()).getSeconds());
 
-      console.log( hours, minutes, seconds);
-
-      second.style.transform=`rotate(${secondDegress}deg )`;
-      minute.style.transform=`rotate(${minuteDegress}deg )`;
-      hour.style.transform=`rotate(${hourDegress}deg )`;
+      second.style.transform=`rotate(${seconds}deg ) scaleX(1)`;
+      minute.style.transform=`rotate(${minutes}deg ) scaleX(.8)`;
+      hour.style.transform=`rotate(${hours}deg) scaleX(.6)`;
     }
 
     setInterval(setDate, 1000);
@@ -47,7 +50,7 @@
   </script>
   <style>
     html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      /* background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50); */
       background-size:cover;
       font-family:'helvetica neue';
       text-align: center;
@@ -88,12 +91,7 @@
       */
     }
     .hand {
-      width:50%;
-      height:6px;
-      background:black;
       position: absolute;
-      top:50%;
-
       transform-origin: 100%;
       transform: rotate(90deg);
       /*  
@@ -104,14 +102,29 @@
         The transform CSS property lets you modify the coordinate space of the CSS visual formatting model. 
         Using it, elements can be translated, rotated, scaled, and skewed.
       */
+      transition: all 0.05s;
+      /* 
+        
+       */
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+
     }
     .hour{
       height: 10px;
+      background-color: red;
+      width:50%;
+      top:50%;
     }
     .minute{
-      height: 5px;;
+      height: 5px;
+      width:50%;
+      top:50%;
+      background-color: green;
     }
     .second{
+      background-color: blue;
+      width:50%;
+      top:51%;
       height: 3px;
     }
   </style>

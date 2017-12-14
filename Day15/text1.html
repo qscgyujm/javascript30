@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day15 testStorage</title>
+</head>
+<body>
+  <div>
+    localStorage
+    <input id="localStorage" type="text">
+  </div>
+  <div>
+    sessionStorage
+    <input id="sessionStorage" type="text">
+  </div>
+  <button id="btnSave">Save</button>
+  <button id="btnLoad">Load</button>
+  <button id="btnShow">Show</button>
+  <script>
+    document.getElementById('btnLoad').addEventListener('click',()=>{
+      document.getElementById('localStorage').value = window.localStorage["localTest"]
+      document.getElementById('sessionStorage').value = window.sessionStorage["sessionTest"]
+    })
+    document.getElementById('btnSave').addEventListener('click',()=>{
+      window.localStorage["localTest"] = document.getElementById('localStorage').value
+      window.sessionStorage["sessionTest"] = document.getElementById('sessionStorage').value
+    })
+    document.getElementById('btnShow').addEventListener('click',()=>{
+      console.log(window.localStorage["localTest"])
+      console.log(window.sessionStorage["localTest"])
+    })
+  </script>
+</body>
+</html>

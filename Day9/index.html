@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day9</title>
+</head>
+<body>
+  
+    <p onClick="makeGreen()">makeGreen</p>
+  
+    <script>
+      const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+  
+      function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+      }
+     // Regular
+      console.log('object');
+      // Interpolated
+      console.log('%s', 'ttttt');
+      // Styled
+      console.log('%c 拉拉拉拉拉拉拉', 'font-size:20px; color:blue; background:red;');
+      // warning!
+      console.warn('warn no')
+      // Error :|
+      console.error('fucking')
+      // Info
+      console.info('info')
+      // Testing
+      const p = document.querySelector('p');
+      console.assert(1 === 1, 'This is true');
+      console.assert(p.classList.contains('ouch'), 'That is wrong!');
+      // https://developer.mozilla.org/en-US/docs/Web/API/console/assert
+
+      // clearing
+      // console.clear();
+      // 
+      // Viewing DOM Elements
+      console.log(p);
+      console.dir(p);
+      // https://developer.mozilla.org/en-US/docs/Web/API/Console/dir
+
+      // Grouping together
+      dogs.forEach(dog=>{
+        // console.group(`${dog.name}`)
+        console.groupCollapsed(`${dog.name}`)
+        console.log('狗的名字',dog.name)
+        console.log(`狗的名字${dog.name} is ${dog.age * 2} years old`)
+        console.groupEnd(`${dog.name}`)
+      })
+
+      // counting
+      console.count('a')
+      console.count('b')
+      console.count('a')
+      console.count('c')
+      console.count('b')
+      console.count('a')
+      console.count('c')
+      console.count('b')
+      console.count('a')
+      
+      // timing
+      console.time('fetching')
+      fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
+        .then(data => data.json())
+        .then(data => {
+          console.timeEnd('fetching')
+          console.log(data);
+          console.table(data);
+        })
+
+
+    </script>
+  </body>
+</html> 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="parentElement">
+        <span id="childElement">foo bar</span>
+     </div>
+     
+    <script>
+      // Create the new node to insert
+      var newNode = document.createElement("span");
+      
+      // Get a reference to the parent node
+      var parentDiv = document.getElementById("childElement").parentNode;
+      
+      // Begin test case [ 1 ] : Exist a childElement --> All working correctly
+      var sp2 = document.getElementById("childElement");
+      parentDiv.insertBefore(newNode, sp2);
+      //End test case [ 1 ]
+      
+      // Begin test case [ 2 ] : childElement is of Type undefined 
+      // var sp2 = undefined; //Not exist a node of id "childElement"
+      // parentDiv.insertBefore(newNode, sp2); // implicit dynamic cast to type Node
+      // End test case [ 2 ]
+      
+      // Begin test case [ 3 ] : childElement is of Type "undefined" ( string )
+      // var sp2 = "undefined"; // Not exist a node of id "childElement"
+      // parentDiv.insertBefore(newNode, sp2); // Generate "Type Error: Invalid Argument" 
+      // End test case [ 3 ]
+    </script>
+</body>
+</html>

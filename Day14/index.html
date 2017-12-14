@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day14</title>
+</head>
+<body>
+  <script>
+    // start with strings, numbers and booleans
+    let age = 10
+    let age2 = age
+    console.log('age:', age, 'age2:', age2)
+    
+    age = 999
+    console.log('age:', age, 'age2:', age2);
+
+    let name1 = 'aaa'
+    let name2 = name1
+    console.log('name1:', name1, 'name2:', name2);
+
+    name1 = 'bbbbbb'
+    console.log('name1:', name1, 'name2:', name2);
+    // https://msdn.microsoft.com/zh-tw/library/d53a7bd4(v=vs.94).aspx
+    
+    // 物件、陣列和函式則以「傳址方式」來複製、傳遞和比較。  當您以傳址方式複製或傳遞時，基本上您會建立原始項目的指標，並使用該指標當做複本。  
+    // 如果您之後變更原始項目，您會同時改變原始項目和複本 (反之亦然)。  真正的實體只有一個，「複本」實際上並不是複本，而只是資料的另一個參考。
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team = players
+    console.log(players, team);
+
+    // team[3] = ' 😀 '
+    // console.log(players, team);
+
+    const team2 = players.slice()
+    // The slice() method returns a shallow copy of a portion of an array into 
+    // a new array object selected from begin to end (end not included). 
+    // The original array will not be modified.
+    // 回傳全新的一個array
+    team2[3] = ' 😀 '
+    console.log(players, team2);
+
+    const team3 = [].concat(players)
+    // and we want to make a copy of it.
+    const team4 = [...players]
+    // You might think we can just do something like this:
+    const team5 = Array.from(players)
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+
+    // or create a new array and concat the old one in
+
+    // or use the new ES6 Spread
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name:'aaaa',
+      age: 1,
+    }
+    // and think we make a copy:
+    const newOne = person
+    newOne.age = 99
+    // how do we take a copy instead?
+    console.log('person:', person, 'newOne:', newOne);
+    // We will hopefully soon see the object ...spread
+
+    const newPerson = Object.assign({}, person, {age:10, number: 999999})
+    const newPerson2 = {...person}
+    console.log('person:', person, 'newOne:', newOne);
+    console.log('nerPerson:', newPerson, 'newPerson2', newPerson2);
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    
+    const key={
+      name: 'aa',
+      age: 11,
+      skill:{
+        sos: 'a',
+        x: 999,
+      }
+    }
+
+    const dev = Object.assign({}, dev)
+    console.log('key:',  key);
+    // Object.assign 只有一層會複製成別的位址 子層與原本的變數同一位址
+
+    // 全部轉換
+    const dev2 = JSON.parse(JSON.stringify(key))
+    console.log(object);
+    // JSON
+    // https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/JSON
+
+    // JSON.parse轉成物件
+    // JSON.stringify轉成字串
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day6</title>
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    
+    let cities = [];
+
+    const promise = fetch(endpoint)
+    console.log(promise)
+    promise.then(blob => {
+      console.log(blob)
+      return blob.json()
+    })
+    .then(data =>{
+      console.log('data',data)
+      cities.push(...data) //... Spread_operator
+    })
+    // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Spread_operator
+    // console.log('cities', cities)
+    
+  function findMatches(word, cities) {
+    return cities.filter(place =>{
+
+      const regex = new RegExp(word, 'gi');
+      // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Regular_Expressions
+      //
+      return place.city.match(regex) || place.state.match(regex)
+      // The match() method retrieves the matches when matching a string against a regular expression.
+    })
+  }
+
+  function showMatches() {
+    // console.log(this.value);
+    const matchArrayList=findMatches(this.value, cities);
+    displayHtml(matchArrayList, this.value);
+    console.log(matchArrayList)
+  }
+
+  function displayHtml(places, value) {
+    const html = places.map(place=>{
+      const regex = new RegExp(value, 'gi');
+      const cityName = place.city.replace(regex, `<span class="h2">${value}</span>`)
+      const cityState = place.state.replace(regex, `<span class="h2">${value}</span>`)
+      // 
+      
+      return `
+        <li>
+          <span class="name">${cityName}, ${cityState}</span>
+          <span class="population">${place.population}</span>
+        </li>
+      `
+    })
+    .join('');
+    // The join() method joins all elements of an array 
+    // (or an array-like object) into a string and returns this string.
+
+    suggestionsUl.innerHTML = html;
+  }
+
+  const searchInput = document.querySelector('.search');
+  const suggestionsUl = document.querySelector('.suggestions');
+
+  searchInput.addEventListener('change', showMatches)
+  searchInput.addEventListener('keyup', showMatches)
+  // https://developer.mozilla.org/en-US/docs/Web/Events/change
+  // change 與 keyup 有一些不同
+  // console.log(searchInput)
+
+    </script>
+      </body>
+</html>
