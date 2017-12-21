@@ -5,18 +5,15 @@ const progressBar = player.querySelector('.progress__filled');
 const toggleButton = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+const fScreenButton = player.querySelector('.fullSceen')
 
 function togglePlay() {
-  // if (video.paused) {
-  //   video.play()
-  // }else{
-  //   video.pause()
-  // }
   // const methods = video.paused ? 'play' : 'pause'
   video[video.paused ? 'play' : 'pause']();
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/paused
 
 function changeVideoIcon() {
@@ -30,11 +27,14 @@ function skip() {
   console.log('skip:', skipSecode, 'currentTime:', video.currentTime);
   video.currentTime +=parseInt(this.dataset.skip)
 }
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentTime
 
 function changeRangeRate() {
   console.log(this.name, this.value)
   video[this.name] = this.value
 }
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playbackRate
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volume
 
 function videoProgress() {
   const percent = (video.currentTime / video.duration) * 100
@@ -50,7 +50,7 @@ function scrubProgress(e) {
   console.log(scrubTime)
 }
 
-function keydownEvnet(e){
+function keydownEvent(e){
   console.log(e.keyCode)
   if(e.keyCode == 32) togglePlay() //空白
   // 上下左右
@@ -69,8 +69,15 @@ video.addEventListener('click', togglePlay)
 video.addEventListener('play', changeVideoIcon)
 video.addEventListener('pause', changeVideoIcon)
 video.addEventListener('timeupdate', videoProgress)
+// https://developer.mozilla.org/en-US/docs/Web/Events/timeupdate
 
 toggleButton.addEventListener('click', togglePlay)
+
+fScreenButton.addEventListener('click', function(){
+  console.log('全螢幕');
+  !document.webkitIsFullScreen ? player.webkitRequestFullscreen() : document.webkitExitFullscreen()
+  fScreenButton.textContent = document.webkitIsFullScreen ? '半' : '全'
+})
 
 skipButtons.forEach(skipButton => skipButton.addEventListener('click', skip))
 // skipButtons.addEventListener('click', skip)
@@ -80,4 +87,5 @@ ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
 
 progress.addEventListener('click', scrubProgress)
 
-document.addEventListener('keydown', keydownEvnet)
+document.addEventListener('keydown', keydownEvent)
+

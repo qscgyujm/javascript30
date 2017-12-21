@@ -26,6 +26,7 @@ body {
   position: relative;
   font-size: 0;
   overflow: hidden;
+  /* https://developer.mozilla.org/zh-TW/docs/Web/CSS/overflow */
 }
 
 /* This css is only applied when fullscreen is active. */

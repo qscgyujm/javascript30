@@ -19,7 +19,8 @@
     // intViewportHeight(width) is the height(width) of the browser window's viewport
     ctx.strokeStyle="#ff0000"
     // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors
-    ctx.lineJoin = "round"
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle
+    ctx.lineJoin = 'round'
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin
     ctx.lineCap = 'round'
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap
@@ -77,11 +78,10 @@
       isDrawing = true;  //不打分號 下一行無法執行
       [lastX, lastY] = [e.offsetX, e.offsetY]
       // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
-
     })
     canvas.addEventListener('mousemove', draw)
     canvas.addEventListener('mouseup', () => isDrawing = false)
-    canvas.addEventListener('mouseup', () => isDrawing = false)
+    canvas.addEventListener('mouseout', () => isDrawing = false)
     // 
   </script>
   <style>

@@ -26,9 +26,11 @@
     // and we want to make a copy of it.
     const team = players;
 
-    console.log(players, team);
+    // console.log('players:', players, 'team:', team);
     // You might think we can just do something like this:
     // team[3] = 'Lux';
+    // console.log('players:', players, 'team:', team);
+    // console.log('players'+ players, 'team'+team);
 
     // however what happens when we update that array?
 
@@ -39,19 +41,28 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
-    const team2 = players.slice();
-
+    // const team2 = players.slice();
+    // console.log('players', players, 'team2', team2);
+    // team2[3]='team2_test'
+    // console.log('players', players, 'team2', team2);
     // one day
 
     // or create a new array and concat the old one in
-    const team3 = [].concat(players);
+    // const team3 = [].concat(players);
+    // console.log('players', players, 'team3', team3);
+    // team3[3]='team3＿test'
+    // console.log('players', players, 'team3', team3);
 
     // or use the new ES6 Spread
-    const team4 = [...players];
-    team4[3] = 'heeee hawww';
-    console.log(team4);
+    // const team4 = [...players];
+    // console.log('players', players, 'team4', team4);
+    // team4[3] = 'team4＿test';
+    // console.log('players', players, 'team4', team4);
 
     const team5 = Array.from(players);
+    console.log('players', players, 'team5', team5);
+    team5[3] = 'team5＿test';
+    console.log('players', players, 'team5', team5);
 
     // now when we update it, the original one isn't changed
 
@@ -62,14 +73,17 @@
       name: 'Wes Bos',
       age: 80
     };
+    // const captain = person;
+    // console.log('person', person, 'captain', captain);
+    // captain.number = 99;
+    // console.log('person', person, 'captain', captain);
 
     // and think we make a copy:
-    // const captain = person;
-    // captain.number = 99;
 
     // how do we take a copy instead?
+    console.log('person', person);
     const cap2 = Object.assign({}, person, { number: 99, age: 12 });
-    console.log(cap2);
+    console.log('person', person, 'cap2', cap2);
 
     // We will hopefully soon see the object ...spread
     // const cap3 = {...person};
@@ -85,8 +99,8 @@
       }
     };
 
-    console.clear();
-    console.log(wes);
+    // console.clear();
+    // console.log(wes);
 
     const dev = Object.assign({}, wes);
 
