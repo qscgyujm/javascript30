@@ -28,6 +28,7 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
     const exerciseFilter = inventors.filter(inventor =>inventor.year >=1500 && inventor.year<1600);
+    const testFilter = inventors.filter(inventor=>{ return inventor });
     // const exerciseFilter = inventors.filter(inventor =>{
     //   if( inventor.year >=1500 && inventor.year<1600){
     //     return true; //return true mean keep it
@@ -35,6 +36,8 @@
     // });
 
     console.table(exerciseFilter);
+    // console.log('testFilter');
+    console.table(inventors.filter(inventor=>{ return inventor }));
     // The filter() method creates a new array with all elements 
     // that pass the test implemented by the provided function.
 
@@ -118,6 +121,7 @@
       if (!obj[item]) {
         obj[item] = 0;
       }
+
       obj[item]++;
       console.log(item);
       return obj;
