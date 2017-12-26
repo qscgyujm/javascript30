@@ -50,21 +50,21 @@
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
-    const findIndexPractice = comments.findIndex(comment => comment.id == 123523)
+    const findIndexPractice = comments.findIndex(comment => comment.id == 823423)
     console.log(findIndexPractice)
 
     // 延伸上一題
     // Array.prototype.splice()
     // The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
     // splice 對原變數產生變動
-    comments.splice(findIndexPractice, 1);
+    // comments.splice(findIndexPractice, 1);
     console.log(comments);
 
     // 產生新變數
     const newComments = [
-      ...comments.splice(0, findIndexPractice),
-      ...comments.splice(findIndexPractice+1)
-    ]
+      ...comments.slice(0, findIndexPractice),
+      ...comments.slice(findIndexPractice+1)
+    ];
     console.log(newComments)
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 
