@@ -51,7 +51,8 @@ function scrubProgress(e) {
 }
 
 function keydownEvent(e){
-  console.log(e.keyCode)
+  // e.preventDefault()
+  console.log(e.keyCode, e)
   if(e.keyCode == 32) togglePlay() //空白
   // 上下左右
   if(e.keyCode == 37) video.currentTime += -5
@@ -82,8 +83,8 @@ fScreenButton.addEventListener('click', function(){
 skipButtons.forEach(skipButton => skipButton.addEventListener('click', skip))
 // skipButtons.addEventListener('click', skip)
 
-ranges.forEach( range => range.addEventListener('click', changeRangeRate))
-ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
+ranges.forEach( range => range.addEventListener('input', changeRangeRate))
+// ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
 
 progress.addEventListener('click', scrubProgress)
 
