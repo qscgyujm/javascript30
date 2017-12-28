@@ -15,25 +15,30 @@
   <script>
     const heroDiv = document.querySelector('.hero')
     const text = heroDiv.querySelector('h1')
-    const percent = 100
+    const percent = 200
 
     function setShadow(e) {
-    //   const Width = heroDiv.offsetWidth
-    //   const Heigth = heroDiv.offsetHeigth
+      // const Width = heroDiv.offsetWidth
+      // const Heigth = heroDiv.offsetHeigth
       const { offsetWidth: Width , offsetHeight: Heigth} = heroDiv
+      // 取得元素的寬高度
+
+      // let x = e.offsetX
+      // let y = e.offsetY
       let { offsetX: x, offsetY: y } = e
-      // console.log(Width, Heigth, x , y);
-      // console.log(this, e.target);
+      // console.log(Width, Heigth, x, y);
+      // 取得滑鼠在現在畫面上的位置
+      // console.log(this, e.target); 
 
       if (this != e.target) {
+        console.log(x, y, e.target.offsetLeft, e.target.offsetTop);
         x = x + e.target.offsetLeft
-        y = y +  e.target.offsetTop
+        y = y + e.target.offsetTop
       }
-      console.log(x, y);
 
       xWalk = (x / Width * percent) - (percent / 2)
       yWalk = (y / Heigth * percent) - (percent / 2)
-      console.log(xWalk, yWalk);
+      // console.log(xWalk, yWalk);
 
       text.style.textShadow = `
         ${xWalk * 1}px ${yWalk * 1}px 0 rgba(255, 0 , 0 , 0.7),

@@ -24,7 +24,7 @@ function changeVideoIcon() {
 
 function skip() {
   const skipSecode = this.dataset.skip;
-  console.log('skip:', skipSecode, 'currentTime:', video.currentTime);
+  // console.log('skip:', skipSecode, 'currentTime:', video.currentTime);
   video.currentTime +=parseInt(this.dataset.skip)
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentTime
@@ -40,21 +40,21 @@ function videoProgress() {
   const percent = (video.currentTime / video.duration) * 100
   progressBar.style.flexBasis = `${percent}%`;
   // progressBar.style.flexBasis = `${percent}%`;
-  console.log(percent);
+  // console.log(percent);
 }
 
 function scrubProgress(e) {
   // console.log(e.offsetX)
   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration
   video.currentTime = scrubTime
-  console.log(scrubTime)
+  // console.log(scrubTime)
 }
 
 function keydownEvent(e){
   // e.preventDefault()
   console.log(e.keyCode, e)
-  if(e.keyCode == 32) togglePlay() //空白
-  // 上下左右
+  if(e.keyCode === 32) togglePlay()
+  
   if(e.keyCode == 37) video.currentTime += -5
   if(e.keyCode == 39) video.currentTime += 5
 
@@ -83,10 +83,11 @@ fScreenButton.addEventListener('click', function(){
 skipButtons.forEach(skipButton => skipButton.addEventListener('click', skip))
 // skipButtons.addEventListener('click', skip)
 
-ranges.forEach( range => range.addEventListener('input', changeRangeRate))
-// ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
+ranges.forEach( range => range.addEventListener('click', changeRangeRate))
+ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
+// input
+
 
 progress.addEventListener('click', scrubProgress)
-
 document.addEventListener('keydown', keydownEvent)
 
