@@ -1,5 +1,7 @@
 # Day5 Flex Panels Image Gallery
 
+[Demo](https://qscgyujm.github.io/javascript30/Day5/index.html)
+
 使用Css的flex來製作動態收縮展開的畫面。
 
 在畫面會有五張圖`<div>`垂直排列著，在點可以做到收縮展開的效果。

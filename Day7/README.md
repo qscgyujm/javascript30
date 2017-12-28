@@ -1,5 +1,7 @@
 # Day7 Array Cardio Day 2
 
+[Demo](https://qscgyujm.github.io/javascript30/Da7/index.html)
+
 這一個章節跟第四天一樣主要是利用Javascript的Array物件中方法做資料處理。
 
 1. 第一個語法是使用`some()`作為練習，是偵測在`peoele`中是否有人大於19歲？

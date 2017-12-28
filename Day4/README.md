@@ -1,5 +1,7 @@
 # Day4 Array Cardio Day 1
 ​
+[Demo](https://qscgyujm.github.io/javascript30/Day4/index.html)
+
 這一個章節主要是利用Javascript的Array物件中方法做資料處理，在第四天會有幾個語法的練習。
 ​
 1. 第一個語法是使用`filter()`作為練習，`filter()`是建立一個新陣列是原先的陣列的判斷式的篩選值。在`filter()`範例中是用來篩選出生年在1500～1600這個區間的人。

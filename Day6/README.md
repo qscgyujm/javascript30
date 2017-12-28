@@ -1,5 +1,7 @@
 # Day6 Ajax Type Ahead
 
+[Demo](https://qscgyujm.github.io/javascript30/Da6/index.html)
+
 第六天的實作是練習Javascript非同步執行。
 
 首先利用`fetch`物件建立接收資料的接口，`fetch`物件是類似於`XMLHttpRequest`，屬於`Ajax`的應用。

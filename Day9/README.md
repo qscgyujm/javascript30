@@ -1,5 +1,7 @@
 # Day9 14 Must Know Dev Tools Tricks
 
+[Demo](https://qscgyujm.github.io/javascript30/Da9/index.html)
+
 第九天主要學習的是console的運用。
 
 何為[console](https://developer.mozilla.org/zh-TW/docs/Tools/Web_Console)？

@@ -1,5 +1,7 @@
 # Day1 JS: Drum Kit
 
+[Demo](https://qscgyujm.github.io/javascript30/Day1/index.html)
+
 第1天的實作是建立一個類似打鼓就產生音效的網頁，當點擊鍵盤時會讓網頁的element產生音效和動態的畫面效果。
 
 首先在畫面建立數個`div`元素，在每個`div`元素中，包含著`span`元素，`span`的內容是對應著鍵盤值。

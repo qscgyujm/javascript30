@@ -1,5 +1,7 @@
 # Day2 JS + CSS Clock
 
+[Demo](https://qscgyujm.github.io/javascript30/Day2/index.html)
+
 在網頁畫面產生一個時鐘，能及時呈現目前的時間。
 
 並且類似時鐘會有3個指針，每個指針會隨著時間的變化，有著相對應的變化，做出跟真實的時鐘一樣，指針會隨著時間移動。

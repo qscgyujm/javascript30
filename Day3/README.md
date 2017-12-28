@@ -1,5 +1,7 @@
 # Day3 Playing with CSS Variables and JS
 
+[Demo](https://qscgyujm.github.io/javascript30/Day3/index.html)
+
 在網頁產生三個控制元件`<input type="range">`，透過三個元件控制圖片元件的`style`變化。
 
 第一個元件控制圖片的`padding`內距。

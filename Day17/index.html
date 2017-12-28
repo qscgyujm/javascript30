@@ -54,6 +54,8 @@
         const exp = /^(a |the |an )/i
         return bandName.replace(exp, '').trim()
         // 將字串開頭的 a ,the ,an 取代.空一格： 要一個單字 沒空格會取代其他單字中含有exp條件
+
+        
       }
 
       const sortBands = bands.sort((a,b)=>{
@@ -64,7 +66,7 @@
       // console.table(sortBands);
 
       document.querySelector('#bands').innerHTML =
-        bands.map(band => {
+      sortBands.map(band => {
           return `<li>${band}</li>`
         })
         .join('')
