@@ -13,7 +13,35 @@
     <span class="speed-value">0</span>
     <span class="units">KM/H</span>
   </h1>
+  <h1>
+    <div class="test"></div>
 
+  </h1>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script>
+    const arrow = document.querySelector('.arrow');
+    const speed = document.querySelector('.speed-value');
+    const test =document.querySelector('.test')
+
+    navigator.geolocation.watchPosition((data) => {
+      test.innerHTML = `
+      <p>latitude:${ data.coords.latitude}</p>
+      <p>longitude:${data.coords.longitude}</p>
+      `
+      console.log(data);
+      speed.textContent = data.coords.speed;
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.error(err);
+    });
+
+
+    window.addEventListener('deviceorientation',function(e) {
+      // console.log(e.alpha + ' : ' + e.beta + ' : ' + e.gamma);
+      // console.log(e.webkitCompassHeading);
+    })
+
+  </script>
   <style>
     html {
       font-size: 100px;
@@ -57,17 +85,6 @@
     }
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
-  <script>
-    const arrow = document.querySelector('.arrow');
-    const speed = document.querySelector('.speed-value');
-
-    navigator.geolocation.watchPosition((data) => {
-      console.log(data);
-      speed.textContent = data.coords.speed;
-      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
-    }, (err) => {
-      console.error(err);
-    });
-  </script>
+  
 </body>
 </html>

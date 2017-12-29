@@ -95,13 +95,15 @@
       }
     }
 
-    const dev = Object.assign({}, dev)
-    console.log('key:',  key);
+    const dev = Object.assign({}, key)
+    console.log('key:',  key, 'dev:', dev)
+    // dev.skill.sos = 'bbb'
+    // console.log('key:',  key, 'dev:', dev)
     // Object.assign 只有一層會複製成別的位址 子層與原本的變數同一位址
 
     // 全部轉換
     const dev2 = JSON.parse(JSON.stringify(key))
-    console.log(object);
+    // console.log(object);
     // JSON
     // https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/JSON
 
