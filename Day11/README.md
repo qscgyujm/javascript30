@@ -1,5 +1,7 @@
 # Day11 Custom HTML5 Video Player
 
+[Demo](https://qscgyujm.github.io/javascript30/Da11/index.html)
+
 第11天的實作目標是要做出一個客製化的網頁影像播放工具。
 
 在Html5中本身就有`video`元素提供影音播放的功能。
@@ -14,7 +16,7 @@
 
 在控制播放的圖示也是透過`video.paused`來判斷目前的圖示，要呈現播放還是暫停的圖示。
 
-```javascript=
+```javascript
 // 控制播放狀態
 video[video.paused ? 'play' : 'pause']();
 
@@ -29,7 +31,7 @@ toggleButton.textContent = icon
 
 在兩個控制元素中的元素屬性中有`data-skip="25"`，`data-skip=-10"`，透過`HTMLElement.dataset`來取得中的數值為`-10`,`25`，因此利用`HTMLElement.dataset`取得數值來控制現在的`video.currentTime`播放時間。
 
-```javascript=
+```javascript
 video.currentTime +=parseInt(this.dataset.skip)
 ```
 
@@ -41,14 +43,14 @@ video.currentTime +=parseInt(this.dataset.skip)
 
 由於控制速率和音量的元素為`input[type=range]`，要點選和拖移同時成立才發生事件。
 
-```javascript=
+```javascript
 ranges.forEach( range => range.addEventListener('click', changeRangeRate))
 ranges.forEach( range => range.addEventListener('mousemove', changeRangeRate))
 ```
 
 在速率跟音量是取得元素的`name`跟`value`來控制速率跟音量。
 
-```javascript=
+```javascript
 video[this.name] = this.value
 ```
 
@@ -58,7 +60,7 @@ video[this.name] = this.value
 
 在這個部分為兩個功能，首先是進度條顯示功能，影片進度條的事件是透過`timeupdate`來觸發，即`video`的`currentTime`更新時就觸發，要知道目前播放的百分比，`currentTime`目前播放時間去與影片長度`duration`轉換成百分比，即可得到目前播放時間的百分比，接下來透過設定Style`flexBasis`，就可以在`currentTime`更新時就改變進度條的長度。
 
-```javascript=
+```javascript
 const percent = (video.currentTime / video.duration) * 100
 progressBar.style.flexBasis = `${percent}%`;
 ```
@@ -66,7 +68,7 @@ progressBar.style.flexBasis = `${percent}%`;
 接下來是`click`事件觸發點選進度條，即可改變播放影片時間的功能，需取得滑鼠點選進度條位置`e.offsetX`和進度條總長度
 `progress.offsetWidth`並將其轉換成百分比數值，把數值設為影片的現在播放時間`video.currentTime`，這樣就可以做到點選進度條即可改變播放目前影片的時間。
 
-```javascript=
+```javascript
 const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration
 video.currentTime = scrubTime
 ```
@@ -75,13 +77,13 @@ video.currentTime = scrubTime
 
 ## Html
 
-```htmlmixed=
+```html
 <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
 ```
 
 影像元素
 
-```htmlmixed=
+```html
 <div class="player__controls">
   <div class="progress">
     <div class="progress__filled"></div>
@@ -96,7 +98,7 @@ video.currentTime = scrubTime
 
 影像的控制元素
 
-## Javascript
+## JS
 
 1. [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement) 
    在html中的影音元素包含`video`，`audio`，提供操作影音的物件，同時繼承`HTMLMediaElement`和`HTMLElement`的屬性和方法。
@@ -105,13 +107,13 @@ video.currentTime = scrubTime
 2. [HTMLMediaElement.play()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) 
    影音元素的播放方法。
 
-```javascript=
+```javascript
 var Promise = HTMLMediaElement.play();
 ```
 
 3. [HTMLMediaElement.paused()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/paused)    影音元素的暫停方法。
 
-```javascript=
+```javascript
 var isPaused = audioOrVideo.pause();
 ```
 
@@ -119,7 +121,7 @@ var isPaused = audioOrVideo.pause();
    影音元素目前的播放狀態，回傳為布林值。
    The read-only HTMLMediaElement.paused property tells whether the media element is paused. 
 
-```javascript=
+```javascript
 var obj = document.createElement('video');
 console.log(obj.paused); // true
 ```
@@ -127,7 +129,7 @@ console.log(obj.paused); // true
 5. [HTMLMediaElement.playbackRate](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) 
    影音元素的播放速率，預設值為1。
 
-```javascript=
+```javascript
 var dSpeed = video.playbackRate;
 audio.playbackRate = 1.0;
 ```
@@ -135,14 +137,14 @@ audio.playbackRate = 1.0;
 6. [HTMLMediaElement.volume](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volume) 
    影音元素的播放音量。
 
-```javascript=
+```javascript
 var volume = video.volume; //1
 ```
 
 7. [HTMLMediaElement.currentTime](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentTime)
    影音元素在目前的播放時間。 
 
-```javascript=
+```javascript
 var cTime = video.currentTime;
 video.currentTime = 35;
 ```

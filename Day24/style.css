@@ -84,3 +84,19 @@ nav a {
   transition:all 0.2s;
   text-transform: uppercase;
 }
+
+
+/* add New fixed class */
+
+.fixedNav nav{
+  position: fixed;
+  box-shadow: 0 5px rgba( 0, 0, 0, 0.1);
+}
+
+.fixedNav li.logo{
+  max-width: 300px;
+}
+
+.fixedNav .site-wrap{
+  transform: scale(1);
+}

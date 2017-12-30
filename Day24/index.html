@@ -56,7 +56,24 @@
     </div>
   
   <script>
-  
+    const nav = document.querySelector('#main')
+    const topNav = nav.offsetTop
+
+    function fixNav(){
+      console.log(window.scrollY, topNav);
+      if (window.scrollY >= topNav) {
+        // console.log('fixed')
+        document.body.style.paddingTop = nav.offsetHeight + 'px'
+        // 加入內距是避免nav貼合時產生跳動的動作
+        document.body.classList.add('fixedNav')
+        // 加到body中 只要加入一個 透過body來控制底下的子元素 
+      }else{
+        document.body.style.paddingTop = 0
+        document.body.classList.remove('fixedNav')
+      }
+    }
+
+    window.addEventListener('scroll', fixNav)
   </script>
   
   </body>

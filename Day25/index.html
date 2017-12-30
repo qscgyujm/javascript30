@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body class="bod">
+
+    <div class="one">
+      <div class="two">
+        <div class="three">
+        </div>
+      </div>
+    </div>
+  
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after { box-sizing: inherit; }
+  
+    div {
+      width:100%;
+      padding:100px;
+    }
+  
+    .one {
+      background: #d8bfd8;
+    }
+  
+    .two {
+      background:mistyrose;
+    }
+  
+    .three {
+      background:coral;
+    }
+  </style>
+  
+  <button></button>
+  <script>
+    // https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/
+
+    const divs = document.querySelectorAll('div')
+
+    function showText(e){
+      // console.log(this.classList.value);
+      console.log(this);
+    }
+
+    divs.forEach(div => div.addEventListener('click', showText))
+  </script>
+  </body>
+</html>
