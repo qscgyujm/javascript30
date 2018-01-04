@@ -11,7 +11,7 @@ function getVideo() {
     .then( localMediaStream =>{
       // https://developer.mozilla.org/en-US/docs/Web/API/Navigator
       // https://developer.mozilla.org/zh-TW/docs/Web/API/MediaDevices
-      console.log(localMediaStream);
+      // console.log(localMediaStream);
 
       video.src = window.URL.createObjectURL(localMediaStream)
       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/src
@@ -19,8 +19,6 @@ function getVideo() {
       // https://developer.mozilla.org/zh-TW/docs/Web/API/Blob
 
       video.play()
-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
     })
     .catch(err =>{
       console.error('Error', err)
@@ -31,17 +29,20 @@ function paintToCanvas() {
   const width = video.videoWidth
   const height = video.videoHeight
   // https://developer.mozilla.org/zh-TW/docs/Web/API/HTMLVideoElement
-  console.log(width, height);
+  // console.log(width, height);
 
   canvas.width = width
   canvas.height = height
   
-
   return setInterval(()=>{
     ctx.drawImage(video, 0, 0, width, height)
+    // console.log(video);
 
     let pixels = ctx.getImageData(0, 0, width, height)
+    
 
+    pixels.data = mirror(pixels, width, height)
+    // console.log(pixels);
     // pixels = redEffect(pixels)
     // pixels值 紅色調大
 
@@ -49,7 +50,7 @@ function paintToCanvas() {
     // ctx.globalAlpha = 0.1
     // 顏色 位置對調
 
-    pixels = greenScreen(pixels)
+    // pixels = greenScreen(pixels)
     
     ctx.putImageData(pixels, 0, 0);
     // debugger
@@ -105,7 +106,7 @@ function greenScreen(pixels){
   document.querySelectorAll('.rgb input').forEach(input =>{
     levels[input.name] = input.value
   })
-  console.log(levels);
+  // console.log(levels);
 
   for(let i = 0; i < pixels.data.length; i = i + 4) {
     let red =   pixels.data[i + 0]   // RED
@@ -118,7 +119,36 @@ function greenScreen(pixels){
       pixels.data[i + 3] = 0
     }
   }
-  console.log(pixels);
+  // console.log(pixels);
+  return pixels
+}
+
+function mirror(pixels, width, height){
+  let index = 0
+  for (let i = 0; i < pixels.height; i++) {
+    // const tmpArray = pixels.data.splice(index, width)
+    // console.log(pixels.data);
+    for (let j = 0; j < pixels.width * 4 / 2; j+=4) {
+      const start = index
+      const end = index + pixels.width * 4
+
+      const R = pixels.data[start+j+0]
+      const G = pixels.data[start+j+1]
+      const B = pixels.data[start+j+2]
+      const A = pixels.data[start+j+3]
+
+      pixels.data[start+j+0] = pixels.data[end-j-4]
+      pixels.data[start+j+1] = pixels.data[end-j-3]
+      pixels.data[start+j+2] = pixels.data[end-j-2]
+      pixels.data[start+j+3] = pixels.data[end-j-1]
+
+      pixels.data[end-j-4]= R
+      pixels.data[end-j-3]= G
+      pixels.data[end-j-2]= B
+      pixels.data[end-j-1]= A
+    }
+    index = index + pixels.width * 4
+  }
   return pixels
 }
 

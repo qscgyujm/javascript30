@@ -18,29 +18,18 @@
       </div>
     </div>
   
-    <a href="./captureIndex.html">Capture Down</a>
-    <button>Once</button>
     <script>
       const divs = document.querySelectorAll('div')
-      const btn = document.querySelector('button')
-
+  
       function logText(e){
-        // console.log(this.classList.value);
-        // e.stopPropagation()
-        // https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
         console.log(this);
       }
   
       document.body.addEventListener('click', logText)
       divs.forEach(div => div.addEventListener('click', logText, {
-        capture:false,
+        capture:true,
       }))
       // divs.forEach(div => div.addEventListener('click', logText, true))
-
-      // 
-      btn.addEventListener('click', () => console.log('once'), {
-        once:true,
-      })
     </script>
   
     <style>
