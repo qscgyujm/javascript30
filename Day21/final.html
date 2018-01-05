@@ -70,7 +70,7 @@
       console.log(data);
       speed.textContent = data.coords.speed;
       arrow.style.transform = `rotate(${data.coords.heading}deg)`;
-      test.innerHTML = JSON.stringify(data[0], data[1])
+      test.innerHTML = JSON.stringify(data.coords)
     }, (err) => {
       console.error(err);
       test.innerHTML= JSON.stringify(err)
