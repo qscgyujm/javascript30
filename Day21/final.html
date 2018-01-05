@@ -72,7 +72,7 @@
       arrow.style.transform = `rotate(${data.coords.heading}deg)`;
     }, (err) => {
       console.error(err);
-      test.innerHTML= err
+      test.innerHTML= JSON.stringify(err)
     });
   </script>
 </body>
