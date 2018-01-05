@@ -40,9 +40,10 @@ function paintToCanvas() {
 
     let pixels = ctx.getImageData(0, 0, width, height)
     
-
     pixels.data = mirror(pixels, width, height)
-    // console.log(pixels);
+    // 2018 1/3 實作影像反轉 可直接反轉canvas元素 transform:scale(-1)
+    // http://www.css88.com/tool/css3Preview/Transform.html
+    
     // pixels = redEffect(pixels)
     // pixels值 紅色調大
 
