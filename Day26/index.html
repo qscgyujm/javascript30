@@ -68,6 +68,54 @@
     </ul>
   </nav>
 
+<script>
+  const triggers = document.querySelectorAll('.cool > li')
+  const bg = document.querySelector('.dropdownBackground')
+  const nav = document.querySelector('.top')
+
+  function handleEnter(){
+    // https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter
+    console.log('Enter', this);
+  
+    this.classList.add('trigger-enter')
+    setTimeout(()=>{
+      if (this.classList.contains('trigger-enter')) {
+        // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+        this.classList.add('trigger-enter-active')
+      }
+    }, 150)
+    // setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+    bg.classList.add('open')
+
+    const dropdown = this.querySelector('.dropdown')
+    const dropdownCoords = dropdown.getBoundingClientRect()
+    const navCoords = nav.getBoundingClientRect()
+    // console.log(dropdownCoords.top, navCoords.top);
+
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left,
+      // dropdownBackground在nav元素中，當gb元素外加其他元素會拉長距離，因此上方無元素時不會被拉長，
+      // 當上方有元素時就會被拉長，因此要扣除元素長度。
+    }
+
+    bg.style.setProperty('height', `${coords.height}px`)
+    bg.style.setProperty('width', `${coords.width}px`)
+    bg.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px)`)
+  }
+
+  function handelLeave(){
+    console.log('Leave', this)
+
+    this.classList.remove('trigger-enter', 'trigger-enter-active')
+    bg.classList.remove('open')
+  }
+
+  triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter))
+  triggers.forEach(trigger => trigger.addEventListener('mouseleave', handelLeave))
+</script>
 <style>
   html {
     box-sizing: border-box;
@@ -134,15 +182,15 @@
     display: none;
   }
 
+  /* 顯示 display從none轉成block */
   .trigger-enter .dropdown {
     display: block;
   }
 
+  /* 顯示 透明度從 0 到 1 */
   .trigger-enter-active .dropdown {
     opacity: 1;
   }
-
-
 
   .dropdownBackground {
     width:100px;
@@ -158,6 +206,7 @@
     opacity:0;
   }
 
+  /* 顯示 dropdownBackground */
   .dropdownBackground.open {
     opacity: 1;
   }
@@ -215,8 +264,6 @@
 
 </style>
 
-<script>
-</script>
 
 </body>
 </html>
